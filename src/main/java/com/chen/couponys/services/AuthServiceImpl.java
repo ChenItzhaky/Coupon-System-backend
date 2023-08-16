@@ -1,5 +1,6 @@
 package com.chen.couponys.services;
 
+import com.chen.couponys.bins.LogToken;
 import com.chen.couponys.bins.User;
 import com.chen.couponys.exceptions.CoupounSystemException;
 import com.chen.couponys.exceptions.ErrMsg;
@@ -35,7 +36,7 @@ public class AuthServiceImpl implements AuthService {
     }
 //todo: enter id from db
     @Override
-    public UUID login(User user) throws CoupounSystemException {
+    public LogToken login(User user) throws CoupounSystemException {
         if (!userRepository.existsByEmailAndPassword(user.getEmail(), user.getPassword())) {
             throw new CoupounSystemException(ErrMsg.EMAIL_AND_PASSWORD_DO_ONT_MACH);
         }
@@ -43,6 +44,10 @@ public class AuthServiceImpl implements AuthService {
         user.setId(userList.get(0).getId());
         System.out.println(1234);
         System.out.println(user);
-        return tokenService.addToken(user);
+        return LogToken.builder()
+                .email(user.getEmail())
+                .type(user.getType())
+                .token(tokenService.addToken(user)).build();
+
     }
 }

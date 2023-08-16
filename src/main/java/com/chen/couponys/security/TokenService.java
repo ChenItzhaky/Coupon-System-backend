@@ -1,5 +1,6 @@
 package com.chen.couponys.security;
 
+import com.chen.couponys.bins.LogToken;
 import com.chen.couponys.bins.User;
 import com.chen.couponys.login.ClientsType;
 import java.util.UUID;

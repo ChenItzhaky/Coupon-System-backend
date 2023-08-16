@@ -2,6 +2,7 @@ package com.chen.couponys.controllers;
 
 
 
+import com.chen.couponys.bins.LogToken;
 import com.chen.couponys.bins.User;
 import com.chen.couponys.exceptions.CoupounSystemException;
 import com.chen.couponys.services.AuthService;
@@ -27,7 +28,8 @@ public class AuthController {
 
     @PostMapping("/login")
     @ResponseStatus(HttpStatus.CREATED)
-    public UUID login(@RequestBody User user) throws CoupounSystemException {
+    public LogToken login(@RequestBody User user) throws CoupounSystemException {
+
         return authService.login(user);
     }
 }

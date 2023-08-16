@@ -2,6 +2,7 @@ package com.chen.couponys.controllers;
 
 import com.chen.couponys.bins.Company;
 import com.chen.couponys.bins.Customer;
+import com.chen.couponys.bins.LogToken;
 import com.chen.couponys.exceptions.CoupounSystemException;
 import com.chen.couponys.exceptions.ErrMsg;
 import com.chen.couponys.login.ClientsType;
@@ -67,7 +68,7 @@ public class AdminController {
     }
 
     @GetMapping("/customer")
-    public List<Customer> getAllCustomers(@RequestHeader UUID token) throws CoupounSystemException {
+    public List<Customer> getAllCustomers(@RequestHeader("Authorization") UUID token) throws CoupounSystemException {
         if (!tokenService.isUserAllowed(token, ClientsType.ADMINISTRATOR)){
             throw new CoupounSystemException(ErrMsg.INVALID_ACTION);
         }

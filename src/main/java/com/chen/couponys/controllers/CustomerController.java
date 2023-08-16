@@ -1,9 +1,6 @@
 package com.chen.couponys.controllers;
 
-import com.chen.couponys.bins.Category;
-import com.chen.couponys.bins.Coupon;
-import com.chen.couponys.bins.Customer;
-import com.chen.couponys.bins.User;
+import com.chen.couponys.bins.*;
 import com.chen.couponys.exceptions.CoupounSystemException;
 import com.chen.couponys.exceptions.ErrMsg;
 import com.chen.couponys.login.ClientsType;
