@@ -217,7 +217,7 @@ public class DatabaseManager implements CommandLineRunner {
                 .password("admin")
                 .type(ClientsType.ADMINISTRATOR)
                 .build();
-        User user2= User.builder()
+        User user2 = User.builder()
                 .email("john.doe@example.com")
                 .password("1234")
                 .type(ClientsType.CUSTOMER)
@@ -275,8 +275,63 @@ public class DatabaseManager implements CommandLineRunner {
                 .type(ClientsType.COMPANY)
                 .build();
 
+        User user13 = User.builder()
+                .email("info@nafis.co.il")
+                .password("1234")
+                .type(ClientsType.COMPANY)
+                .build();
 
-        userRepository.saveAll(List.of(user1,user2,user3,user4,user5,user6,user7,user8,user9,user10,user11,user12));
+        User user14 = User.builder()
+                .email("info@Isrotel.co.il")
+                .password("1234")
+                .type(ClientsType.COMPANY)
+                .build();
+
+        User user15 = User.builder()
+                .email("info@shlomo-sixes.co.il")
+                .password("1234")
+                .type(ClientsType.COMPANY)
+                .build();
+
+        User user16 = User.builder()
+                .email("info@super-pharm.co.il")
+                .password("1234")
+                .type(ClientsType.COMPANY)
+                .build();
+
+        User user17 = User.builder()
+                .email("info@ksp.com")
+                .password("1234")
+                .type(ClientsType.COMPANY)
+                .build();
+
+        User user18 = User.builder()
+                .email("info@fox.co.il")
+                .password("1234")
+                .type(ClientsType.COMPANY)
+                .build();
+
+        User user19 = User.builder()
+                .email("info@castro.com")
+                .password("1234")
+                .type(ClientsType.COMPANY)
+                .build();
+
+        User user20 = User.builder()
+                .email("info@mega.co.il")
+                .password("1234")
+                .type(ClientsType.COMPANY)
+                .build();
+
+        User user21 = User.builder()
+                .email("info@burger-ranch.co.il")
+                .password("1234")
+                .type(ClientsType.COMPANY)
+                .build();
+
+
+        userRepository.saveAll(List.of(user1, user2, user3, user4, user5, user6, user7, user8, user9, user10, user11, user12,
+                 user13, user14, user15, user16, user17, user18, user19, user20, user21));
 
 
     }

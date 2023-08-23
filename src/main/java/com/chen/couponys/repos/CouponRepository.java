@@ -18,11 +18,13 @@ public interface CouponRepository extends JpaRepository<Coupon, Integer> {
     List<Coupon> findByEndDateAfter(Date date);
 
     List<Coupon> findByCompanyIdAndPriceLessThan(int id, double maxPrice);
+    List<Coupon> findByPriceLessThan( double maxPrice);
     List<Coupon> findByTitle(String title);
 
     List<Coupon> findByCompanyIdAndTitle(int id, String title);
 
     List<Coupon> findByCompanyIdAndCategory(int id, Category category);
+    List<Coupon> findByCategory(Category category);
 
     @Modifying
     @Transactional

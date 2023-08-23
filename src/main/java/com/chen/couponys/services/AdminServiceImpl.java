@@ -3,6 +3,7 @@ package com.chen.couponys.services;
 import com.chen.couponys.bins.Company;
 import com.chen.couponys.bins.Coupon;
 import com.chen.couponys.bins.Customer;
+import com.chen.couponys.bins.User;
 import com.chen.couponys.exceptions.CoupounSystemException;
 import com.chen.couponys.exceptions.ErrMsg;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ public class AdminServiceImpl extends ClientService implements AdminService {
     private CompanyService companyService;
     @Autowired
     private CustomerService customerService;
+    private UserService userService;
 
 
     @Override
@@ -47,7 +49,18 @@ public class AdminServiceImpl extends ClientService implements AdminService {
         if (!companyRepository.existsById(id)){
             throw new CoupounSystemException(ErrMsg.ID_NOT_FOUND);
         }
+        Company company = companyService.getCompanyDetails(id);
+        User user = userService.findByEmail(company.getEmail());
         companyRepository.deleteById(id);
+        userRepository.deleteById(user.getId());
+    }
+
+    @Override
+    public void deleteUser(int id) throws CoupounSystemException {
+        if (!userRepository.existsById(id)){
+            throw new CoupounSystemException(ErrMsg.ID_NOT_FOUND);
+        }
+        userRepository.deleteById(id);
     }
 
     @Override
@@ -85,13 +98,21 @@ public class AdminServiceImpl extends ClientService implements AdminService {
         if (!customerRepository.existsById(id)){
             throw new CoupounSystemException(ErrMsg.ID_NOT_FOUND);
         }
+        Customer customer = customerService.getCustomerDetails(id);
+        User user = userService.findByEmail(customer.getEmail());
         customerRepository.deleteById(id);
+        userRepository.deleteById(user.getId());
 
     }
 
     @Override
     public List<Customer> getAllCustomers() {
         return customerRepository.findAll();
+    }
+
+    @Override
+    public List<User> getAllUser() {
+        return userRepository.findAll();
     }
 
     @Override
