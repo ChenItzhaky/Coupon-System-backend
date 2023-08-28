@@ -18,6 +18,7 @@ public class AdminServiceImpl extends ClientService implements AdminService {
     private CompanyService companyService;
     @Autowired
     private CustomerService customerService;
+    @Autowired
     private UserService userService;
 
 

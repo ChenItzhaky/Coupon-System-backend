@@ -43,7 +43,7 @@ public class AdminController {
     }
 
     @DeleteMapping("/companies/{id}")
-    public void deleteCompany( @RequestHeader UUID token, @PathVariable int id) throws Exception {
+    public void deleteCompany( @RequestHeader ("Authorization") UUID token, @PathVariable int id) throws Exception {
         if (!tokenService.isUserAllowed(token, ClientsType.ADMINISTRATOR)){
             throw new CoupounSystemException(ErrMsg.INVALID_ACTION);
         }
@@ -93,7 +93,7 @@ public class AdminController {
     }
 
     @DeleteMapping("/customer/{id}")
-    public void deleteCustomer(@RequestHeader UUID token, @PathVariable int id) throws Exception {
+    public void deleteCustomer(@RequestHeader ("Authorization") UUID token, @PathVariable int id) throws Exception {
         if (!tokenService.isUserAllowed(token, ClientsType.ADMINISTRATOR)){
             throw new CoupounSystemException(ErrMsg.INVALID_ACTION);
         }
