@@ -32,9 +32,9 @@ public class TokenServiceImpl implements TokenService{
 
     @Override
     public boolean isUserAllowed(UUID token, ClientsType type) {
-        Information info =tokenMap.get(token);
+        Information info = tokenMap.get(token);
         System.out.println(info);
-        ClientsType clientsType =info.getClientTyp();
+        ClientsType clientsType = info.getClientTyp();
         System.out.println(clientsType);
 
         return clientsType.equals(type);

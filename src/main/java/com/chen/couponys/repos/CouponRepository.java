@@ -31,6 +31,10 @@ public interface CouponRepository extends JpaRepository<Coupon, Integer> {
     @Query(value = "INSERT INTO `inspringwetrust`.`customers_coupon_list` (`customer_id`, `coupon_list_id`) VALUES (?, ?);",nativeQuery = true)
     void purchaseCoupon(int id, int couponId) throws Exception;
 
-    @Override
-    void delete(Coupon coupon);
+    @Modifying
+    @Transactional
+    @Query(value = "delete  FROM inspringwetrust.customers_coupon_list where coupon_list_id = ?;", nativeQuery = true)
+    void delCouponPurchase(int id);
+
+
 }

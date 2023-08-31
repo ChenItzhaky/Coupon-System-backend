@@ -51,6 +51,12 @@ public class AdminServiceImpl extends ClientService implements AdminService {
             throw new CoupounSystemException(ErrMsg.ID_NOT_FOUND);
         }
         Company company = companyService.getCompanyDetails(id);
+        if (!company.getCoupons().isEmpty()){
+        for (Coupon c:company.getCoupons()) {
+            couponRepository.delCouponPurchase(c.getId());
+            couponRepository.deleteById(c.getId());
+        }
+        }
         User user = userService.findByEmail(company.getEmail());
         companyRepository.deleteById(id);
         userRepository.deleteById(user.getId());
@@ -100,6 +106,12 @@ public class AdminServiceImpl extends ClientService implements AdminService {
             throw new CoupounSystemException(ErrMsg.ID_NOT_FOUND);
         }
         Customer customer = customerService.getCustomerDetails(id);
+        if (!customer.getCouponList().isEmpty()){
+            for (Coupon c:customer.getCouponList()) {
+                couponRepository.delCouponPurchase(c.getId());
+                couponRepository.deleteById(c.getId());
+            }
+        }
         User user = userService.findByEmail(customer.getEmail());
         customerRepository.deleteById(id);
         userRepository.deleteById(user.getId());
