@@ -34,7 +34,7 @@ public class AdminController {
     }
 
     @PostMapping("/companies/add")
-    public void addCompany( @RequestHeader UUID token, @RequestBody Company company) throws Exception {
+    public void addCompany( @RequestHeader("Authorization") UUID token, @RequestBody Company company) throws Exception {
         if (!tokenService.isUserAllowed(token, ClientsType.ADMINISTRATOR)){
             throw new CoupounSystemException(ErrMsg.INVALID_ACTION);
         }
@@ -52,7 +52,7 @@ public class AdminController {
     }
 
     @GetMapping("/companies/{id}")
-    public Company getSingleCompany( @RequestHeader UUID token, @PathVariable int id) throws Exception {
+    public Company getSingleCompany( @RequestHeader("Authorization") UUID token, @PathVariable int id) throws Exception {
         if (!tokenService.isUserAllowed(token, ClientsType.ADMINISTRATOR)){
             throw new CoupounSystemException(ErrMsg.INVALID_ACTION);
         }
@@ -60,7 +60,7 @@ public class AdminController {
     }
 
     @PutMapping("/companies/{id}")
-    public void updateCompany(@RequestHeader UUID token, @PathVariable int id, @RequestBody Company company) throws Exception {
+    public void updateCompany(@RequestHeader("Authorization") UUID token, @PathVariable int id, @RequestBody Company company) throws Exception {
         if (!tokenService.isUserAllowed(token, ClientsType.ADMINISTRATOR)){
             throw new CoupounSystemException(ErrMsg.INVALID_ACTION);
         }
@@ -84,7 +84,7 @@ public class AdminController {
     }
 
     @PostMapping("/customer/add")
-    public void addCustomer(@RequestHeader UUID token, @RequestBody Customer customer) throws Exception {
+    public void addCustomer(@RequestHeader("Authorization") UUID token, @RequestBody Customer customer) throws Exception {
         if (!tokenService.isUserAllowed(token, ClientsType.ADMINISTRATOR)){
             throw new CoupounSystemException(ErrMsg.INVALID_ACTION);
         }
@@ -102,7 +102,7 @@ public class AdminController {
     }
 
     @GetMapping("/customer/{id}")
-    public Customer getSingleCustomer(@RequestHeader UUID token, @PathVariable int id) throws Exception {
+    public Customer getSingleCustomer(@RequestHeader("Authorization") UUID token, @PathVariable int id) throws Exception {
         if (!tokenService.isUserAllowed(token, ClientsType.ADMINISTRATOR)){
             throw new CoupounSystemException(ErrMsg.INVALID_ACTION);
         }
@@ -110,7 +110,7 @@ public class AdminController {
     }
 
     @PutMapping("/customer/{id}")
-    public void updateCustomer(@RequestHeader UUID token, @PathVariable int id, @RequestBody Customer customer) throws Exception {
+    public void updateCustomer(@RequestHeader("Authorization") UUID token, @PathVariable int id, @RequestBody Customer customer) throws Exception {
         if (!tokenService.isUserAllowed(token, ClientsType.ADMINISTRATOR)){
             throw new CoupounSystemException(ErrMsg.INVALID_ACTION);
         }

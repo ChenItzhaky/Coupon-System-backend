@@ -22,12 +22,12 @@ public class PublicController {
     }
 
     @GetMapping("/coupon/category")
-    public List<Coupon> getAllCouponsByCategory(@RequestParam ("Authorization") Category category) {
+    public List<Coupon> getAllCouponsByCategory(@RequestParam Category category) {
         return couponRepository.findByCategory(category);
     }
 
     @GetMapping("/coupon/price")
-    public List<Coupon> getAllCouponsByPrice(@RequestParam ("Authorization") double maxPrice) {
+    public List<Coupon> getAllCouponsByPrice(@RequestParam double maxPrice) {
         return couponRepository.findByPriceLessThan(maxPrice);
     }
 

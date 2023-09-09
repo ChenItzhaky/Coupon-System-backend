@@ -29,7 +29,7 @@ public class CompanyController {
     private TokenService tokenService;
 
     @GetMapping
-    public Company getCompanyDetails(@RequestHeader UUID token) throws Exception {
+    public Company getCompanyDetails(@RequestHeader("Authorization") UUID token) throws Exception {
         if (!tokenService.isUserAllowed(token, ClientsType.COMPANY)) {
             throw new CoupounSystemException(ErrMsg.INVALID_ACTION);
         }
@@ -41,7 +41,7 @@ public class CompanyController {
     }
 
     @GetMapping("/coupons")
-    public List<Coupon> getCompanyCoupons(@RequestHeader UUID token) throws CoupounSystemException {
+    public List<Coupon> getCompanyCoupons(@RequestHeader("Authorization") UUID token) throws CoupounSystemException {
         if (!tokenService.isUserAllowed(token, ClientsType.COMPANY)) {
             throw new CoupounSystemException(ErrMsg.INVALID_ACTION);
         }
@@ -52,7 +52,7 @@ public class CompanyController {
 
 
     @GetMapping("/coupons/Price")
-    public List<Coupon> getCompanyCoupons(@RequestHeader UUID token, @RequestParam double max) throws CoupounSystemException {
+    public List<Coupon> getCompanyCoupons(@RequestHeader("Authorization") UUID token, @RequestParam double max) throws CoupounSystemException {
         if (!tokenService.isUserAllowed(token, ClientsType.COMPANY)) {
             throw new CoupounSystemException(ErrMsg.INVALID_ACTION);
         }
@@ -63,7 +63,7 @@ public class CompanyController {
 
 
     @GetMapping("/coupons/category")
-    public List<Coupon> getCompanyCoupons(@RequestHeader UUID token, @RequestParam Category category) throws CoupounSystemException {
+    public List<Coupon> getCompanyCoupons(@RequestHeader("Authorization") UUID token, @RequestParam Category category) throws CoupounSystemException {
         if (!tokenService.isUserAllowed(token, ClientsType.COMPANY)) {
             throw new CoupounSystemException(ErrMsg.INVALID_ACTION);
         }
@@ -73,7 +73,7 @@ public class CompanyController {
     }
 
     @PostMapping("/coupons/add")
-    public void addCoupon(@RequestHeader UUID token, @RequestBody Coupon coupon) throws Exception {
+    public void addCoupon(@RequestHeader("Authorization") UUID token, @RequestBody Coupon coupon) throws Exception {
         if (!tokenService.isUserAllowed(token, ClientsType.COMPANY)) {
             throw new CoupounSystemException(ErrMsg.INVALID_ACTION);
         }
@@ -86,7 +86,7 @@ public class CompanyController {
     }
 
     @PutMapping("/coupons/{id}")
-    public void updateCoupon(@RequestHeader UUID token, @PathVariable int id, @RequestBody Coupon coupon) throws Exception {
+    public void updateCoupon(@RequestHeader("Authorization") UUID token, @PathVariable int id, @RequestBody Coupon coupon) throws Exception {
         if (!tokenService.isUserAllowed(token, ClientsType.COMPANY)) {
             throw new CoupounSystemException(ErrMsg.INVALID_ACTION);
         }
@@ -101,7 +101,7 @@ public class CompanyController {
     }
 
     @DeleteMapping("/coupons/{id}")
-    public void deleteCoupon(@RequestHeader UUID token, @PathVariable int id) throws CoupounSystemException {
+    public void deleteCoupon(@RequestHeader("Authorization") UUID token, @PathVariable int id) throws CoupounSystemException {
         if (!tokenService.isUserAllowed(token, ClientsType.COMPANY)) {
             throw new CoupounSystemException(ErrMsg.INVALID_ACTION);
         }

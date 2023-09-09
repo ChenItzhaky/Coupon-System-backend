@@ -26,7 +26,7 @@ public class CustomerController {
 
 
     @GetMapping("/coupon")
-    public List<Coupon> getCustomerCoupons(@RequestHeader UUID token) throws CoupounSystemException {
+    public List<Coupon> getCustomerCoupons(@RequestHeader("Authorization") UUID token) throws CoupounSystemException {
         if (!tokenService.isUserAllowed(token, ClientsType.CUSTOMER)) {
             throw new CoupounSystemException(ErrMsg.INVALID_ACTION);
         }
@@ -38,7 +38,7 @@ public class CustomerController {
 
 
     @GetMapping("/coupon/category")
-    List<Coupon> getCustomerCoupons(@RequestHeader UUID token, @RequestParam Category category) throws CoupounSystemException {
+    List<Coupon> getCustomerCoupons(@RequestHeader("Authorization") UUID token, @RequestParam Category category) throws CoupounSystemException {
         if (!tokenService.isUserAllowed(token, ClientsType.CUSTOMER)) {
             throw new CoupounSystemException(ErrMsg.INVALID_ACTION);
         }
@@ -49,7 +49,7 @@ public class CustomerController {
 
 
     @GetMapping("/coupon/price")
-    public List<Coupon> getCustomerCoupons(@RequestHeader UUID token, @RequestParam double maxPrice) throws CoupounSystemException {
+    public List<Coupon> getCustomerCoupons(@RequestHeader("Authorization") UUID token, @RequestParam double maxPrice) throws CoupounSystemException {
         if (!tokenService.isUserAllowed(token, ClientsType.CUSTOMER)) {
             throw new CoupounSystemException(ErrMsg.INVALID_ACTION);
         }
@@ -59,7 +59,7 @@ public class CustomerController {
     }
 
     @GetMapping
-    public Customer getCustomerDetails(@RequestHeader UUID token) throws Exception {
+    public Customer getCustomerDetails(@RequestHeader("Authorization") UUID token) throws Exception {
         if (!tokenService.isUserAllowed(token, ClientsType.CUSTOMER)) {
             throw new CoupounSystemException(ErrMsg.INVALID_ACTION);
         }
@@ -70,7 +70,7 @@ public class CustomerController {
     }
 
     @PutMapping("/purchase")
-    private void purchaseCoupon(@RequestHeader UUID token, @RequestParam int couponId) throws Exception {
+    private void purchaseCoupon(@RequestHeader("Authorization") UUID token, @RequestParam int couponId) throws Exception {
         if (!tokenService.isUserAllowed(token, ClientsType.CUSTOMER)) {
             throw new CoupounSystemException(ErrMsg.INVALID_ACTION);
         }

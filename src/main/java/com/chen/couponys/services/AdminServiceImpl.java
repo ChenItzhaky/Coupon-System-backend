@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AdminServiceImpl extends ClientService implements AdminService {
@@ -30,7 +31,7 @@ public class AdminServiceImpl extends ClientService implements AdminService {
     @Override
     public void addCompany(Company company) throws Exception {
         int id = company.getId();
-        if (companyRepository.existsById(id)){
+        if (!companyRepository.existsById(id)){
             throw new CoupounSystemException(ErrMsg.ID_ALREADY_EXIST);
         }
         companyRepository.save(company);
@@ -38,10 +39,13 @@ public class AdminServiceImpl extends ClientService implements AdminService {
 
     @Override
     public void updateCompany(int id, Company company) throws Exception {
-        if (companyRepository.existsById(id)){
+        if (!companyRepository.existsById(id)){
             throw new CoupounSystemException(ErrMsg.ID_NOT_FOUND);
         }
+        Company oldCompany = companyRepository.findById(id).orElseThrow();
+        List<Coupon> couponList = oldCompany.getCoupons();
         company.setId(id);
+        company.setCoupons(couponList);
         companyRepository.saveAndFlush(company);
     }
 
@@ -84,7 +88,7 @@ public class AdminServiceImpl extends ClientService implements AdminService {
     @Override
     public void addCustomer(Customer customer) throws Exception {
         int id = customer.getId();
-        if (customerRepository.existsById(id)){
+        if (!customerRepository.existsById(id)){
             throw new CoupounSystemException(ErrMsg.ID_NOT_FOUND);
         }
         customerRepository.save(customer);
@@ -93,10 +97,13 @@ public class AdminServiceImpl extends ClientService implements AdminService {
 
     @Override
     public void updateCustomer(int id, Customer customer) throws Exception {
-        if (customerRepository.existsById(id)){
+        if (!customerRepository.existsById(id)){
             throw new CoupounSystemException(ErrMsg.ID_NOT_FOUND);
         }
+        Customer olsCustomer =customerRepository.findById(id).orElseThrow();
+        List<Coupon> couponList = olsCustomer.getCouponList();
         customer.setId(id);
+        customer.setCouponList(couponList);
         customerRepository.saveAndFlush(customer);
     }
 
