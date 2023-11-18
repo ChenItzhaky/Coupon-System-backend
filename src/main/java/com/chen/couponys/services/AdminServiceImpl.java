@@ -6,6 +6,7 @@ import com.chen.couponys.bins.Customer;
 import com.chen.couponys.bins.User;
 import com.chen.couponys.exceptions.CoupounSystemException;
 import com.chen.couponys.exceptions.ErrMsg;
+import com.chen.couponys.login.ClientsType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.sql.Date;
@@ -31,9 +32,13 @@ public class AdminServiceImpl extends ClientService implements AdminService {
     @Override
     public void addCompany(Company company) throws Exception {
         int id = company.getId();
-        if (!companyRepository.existsById(id)){
+        if (companyRepository.existsById(id)){
             throw new CoupounSystemException(ErrMsg.ID_ALREADY_EXIST);
         }
+        User user = User.builder().email(company.getEmail())
+                .password(company.getPassword())
+                .type(ClientsType.COMPANY).build();
+        userRepository.save(user);
         companyRepository.save(company);
     }
 
@@ -88,9 +93,13 @@ public class AdminServiceImpl extends ClientService implements AdminService {
     @Override
     public void addCustomer(Customer customer) throws Exception {
         int id = customer.getId();
-        if (!customerRepository.existsById(id)){
-            throw new CoupounSystemException(ErrMsg.ID_NOT_FOUND);
+        if (customerRepository.existsById(id)){
+            throw new CoupounSystemException(ErrMsg.ID_ALREADY_EXIST);
         }
+        User user = User.builder().email(customer.getEmail())
+                .password(customer.getPassword())
+                .type(ClientsType.CUSTOMER).build();
+        userRepository.save(user);
         customerRepository.save(customer);
 
     }
