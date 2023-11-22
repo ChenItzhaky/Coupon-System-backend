@@ -27,14 +27,18 @@ public class AdminController {
 
     @GetMapping("/companies")
     public List<Company> getAllCompanies(@RequestHeader("Authorization") UUID token) throws CoupounSystemException {
+        System.out.println("1");
         if (!tokenService.isUserAllowed(token, ClientsType.ADMINISTRATOR)){
+            System.out.println("2");
             throw new CoupounSystemException(ErrMsg.INVALID_ACTION);
         }
+        System.out.println("3");
         return adminService.getAllCompanies();
     }
 
     @PostMapping("/companies/add")
     public void addCompany( @RequestHeader("Authorization") UUID token, @RequestBody Company company) throws Exception {
+        System.out.println(company);
         if (!tokenService.isUserAllowed(token, ClientsType.ADMINISTRATOR)){
             throw new CoupounSystemException(ErrMsg.INVALID_ACTION);
         }
