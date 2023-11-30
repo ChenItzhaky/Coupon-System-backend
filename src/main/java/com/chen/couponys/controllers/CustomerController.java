@@ -71,8 +71,8 @@ public class CustomerController {
         return customerService.getCustomerDetails(customerId);
     }
 
-    @PutMapping("/purchase")
-    private void purchaseCoupon(@RequestHeader("Authorization") UUID token, @RequestParam int couponId) throws Exception {
+    @PutMapping("/purchase/{couponId}")
+    private void purchaseCoupon(@RequestHeader("Authorization") UUID token, @PathVariable int couponId) throws Exception {
         if (!tokenService.isUserAllowed(token, ClientsType.CUSTOMER)) {
             throw new CoupounSystemException(ErrMsg.INVALID_ACTION);
         }
