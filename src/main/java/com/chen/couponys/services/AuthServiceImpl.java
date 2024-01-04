@@ -34,7 +34,7 @@ public class AuthServiceImpl implements AuthService {
         userRepository.save(user);
 
     }
-//todo: enter id from db
+
     @Override
     public LogToken login(User user) throws CoupounSystemException {
         if (!userRepository.existsByEmailAndPassword(user.getEmail(), user.getPassword())) {
@@ -42,8 +42,6 @@ public class AuthServiceImpl implements AuthService {
         }
         List<User> userList = userRepository.findByEmail(user.getEmail());
         user.setId(userList.get(0).getId());
-        System.out.println(1234);
-        System.out.println(user);
         return LogToken.builder()
                 .email(user.getEmail())
                 .type(user.getType())

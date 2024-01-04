@@ -85,33 +85,33 @@ public class CompanyController {
 
     }
 
-    @PutMapping("/coupons/{id}")
-    public void updateCoupon(@RequestHeader("Authorization") UUID token, @PathVariable int id, @RequestBody Coupon coupon) throws Exception {
+    @PutMapping("/coupons/{couponId}")
+    public void updateCoupon(@RequestHeader("Authorization") UUID token, @PathVariable int couponId, @RequestBody Coupon coupon) throws Exception {
         if (!tokenService.isUserAllowed(token, ClientsType.COMPANY)) {
             throw new CoupounSystemException(ErrMsg.INVALID_ACTION);
         }
         User user = tokenService.userFromToken(token);
-        Coupon couponTest = couponRepository.findById(id).orElseThrow(() -> new CoupounSystemException(ErrMsg.INVALID_ACTION));
+        Coupon couponTest = couponRepository.findById(couponId).orElseThrow(() -> new CoupounSystemException(ErrMsg.INVALID_ACTION));
         Company company = companyRepository.findByEmail(user.getEmail()).get(0);
         if (!couponTest.getCompany().equals(company)) {
             throw new CoupounSystemException(ErrMsg.INVALID_ACTION);
         }
         coupon.setCompany(company);
-        companyService.updateCoupon(id, coupon);
+        companyService.updateCoupon(couponId, coupon);
     }
 
-    @DeleteMapping("/coupons/{id}")
-    public void deleteCoupon(@RequestHeader("Authorization") UUID token, @PathVariable int id) throws CoupounSystemException {
+    @DeleteMapping("/coupons/{couponId}")
+    public void deleteCoupon(@RequestHeader("Authorization") UUID token, @PathVariable int couponId) throws CoupounSystemException {
         if (!tokenService.isUserAllowed(token, ClientsType.COMPANY)) {
             throw new CoupounSystemException(ErrMsg.INVALID_ACTION);
         }
         User user = tokenService.userFromToken(token);
-        Coupon couponTest = couponRepository.findById(id).orElseThrow(() -> new CoupounSystemException(ErrMsg.INVALID_ACTION));
+        Coupon couponTest = couponRepository.findById(couponId).orElseThrow(() -> new CoupounSystemException(ErrMsg.INVALID_ACTION));
         Company company = companyRepository.findByEmail(user.getEmail()).get(0);
         if (!couponTest.getCompany().equals(company)) {
             throw new CoupounSystemException(ErrMsg.INVALID_ACTION);
         }
-        companyService.deleteCoupon(id);
+        companyService.deleteCoupon(couponId);
 
     }
 

@@ -68,8 +68,8 @@ public class CustomerServiceImpl extends ClientService implements CustomerServic
     }
 
     @Override
-    public List<Coupon> getCustomerCoupons(int id, Category category) throws CoupounSystemException {
-        List<Integer> couponsId =customerRepository.findCustomerCoupons(id,category.name());
+    public List<Coupon> getCustomerCoupons(int customerId, Category category) throws CoupounSystemException {
+        List<Integer> couponsId =customerRepository.findCustomerCoupons(customerId,category.name());
         System.out.println(couponsId);
         List<Coupon> couponList= new ArrayList<>();
         System.out.println(couponList);
@@ -81,8 +81,8 @@ public class CustomerServiceImpl extends ClientService implements CustomerServic
     }
 
     @Override
-    public List<Coupon> getCustomerCoupons(int id, double maxPrice) throws CoupounSystemException {
-        List<Integer> couponsId =customerRepository.findCustomerCoupons(id,maxPrice);
+    public List<Coupon> getCustomerCoupons(int customerId, double maxPrice) throws CoupounSystemException {
+        List<Integer> couponsId =customerRepository.findCustomerCoupons(customerId,maxPrice);
         List<Coupon> couponList= new ArrayList<>();
         for (Integer i:couponsId) {
             couponList.add(couponRepository.findById(i)
@@ -92,8 +92,8 @@ public class CustomerServiceImpl extends ClientService implements CustomerServic
     }
 
     @Override
-    public Customer getCustomerDetails(int id) throws Exception {
-        return customerRepository.findById(id)
+    public Customer getCustomerDetails(int customerId) throws Exception {
+        return customerRepository.findById(customerId)
                 .orElseThrow(() -> new CoupounSystemException(ErrMsg.ID_NOT_FOUND));
     }
 

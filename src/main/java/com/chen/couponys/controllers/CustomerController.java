@@ -27,12 +27,10 @@ public class CustomerController {
 
     @GetMapping("/coupon")
     public List<Coupon> getCustomerCoupons(@RequestHeader("Authorization") UUID token) throws CoupounSystemException {
-        System.out.println("1");
         if (!tokenService.isUserAllowed(token, ClientsType.CUSTOMER)) {
             throw new CoupounSystemException(ErrMsg.INVALID_ACTION);
         }
         User user = tokenService.userFromToken(token);
-        System.out.println("2");
         int customerId = customerRepository.findByEmail(user.getEmail()).get(0).getId();
         System.out.println(customerId);
         return customerService.getCustomerCoupons(customerId);

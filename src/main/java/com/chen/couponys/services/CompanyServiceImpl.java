@@ -27,42 +27,42 @@ public class CompanyServiceImpl extends ClientService implements CompanyService 
     }
 
     @Override
-    public void updateCoupon(int id, Coupon coupon) throws Exception {
-        if (!couponRepository.existsById(id)) {
+    public void updateCoupon(int couponId, Coupon coupon) throws Exception {
+        if (!couponRepository.existsById(couponId)) {
             throw new CoupounSystemException(ErrMsg.ID_NOT_FOUND);
         }
-        coupon.setId(id);
+        coupon.setId(couponId);
         couponRepository.saveAndFlush(coupon);
     }
 
     @Override
     public void
-    deleteCoupon(int id) throws CoupounSystemException {
-        if (!couponRepository.existsById(id)) {
+    deleteCoupon(int couponId) throws CoupounSystemException {
+        if (!couponRepository.existsById(couponId)) {
             throw new CoupounSystemException(ErrMsg.ID_NOT_FOUND);
         }
-        couponRepository.deleteById(id);
+        couponRepository.deleteById(couponId);
     }
 
     @Override
-    public List<Coupon> getCompanyCoupons(int id) {
+    public List<Coupon> getCompanyCoupons(int companyId) {
 
-        return couponRepository.findByCompanyId(id);
+        return couponRepository.findByCompanyId(companyId);
     }
 
     @Override
-    public List<Coupon> getCompanyCoupons(double maxPrice, int id) {
-        return couponRepository.findByCompanyIdAndPriceLessThan(id, maxPrice);
+    public List<Coupon> getCompanyCoupons(double maxPrice, int companyId) {
+        return couponRepository.findByCompanyIdAndPriceLessThan(companyId, maxPrice);
     }
 
     @Override
-    public List<Coupon> getCompanyCoupons(Category category, int id) {
-        return couponRepository.findByCompanyIdAndCategory(id, category);
+    public List<Coupon> getCompanyCoupons(Category category, int companyId) {
+        return couponRepository.findByCompanyIdAndCategory(companyId, category);
     }
 
     @Override
-    public Company getCompanyDetails(int id) throws Exception {
-        return companyRepository.findById(id)
+    public Company getCompanyDetails(int companyId) throws Exception {
+        return companyRepository.findById(companyId)
                 .orElseThrow(()-> new CoupounSystemException(ErrMsg.ID_NOT_FOUND));
     }
 }

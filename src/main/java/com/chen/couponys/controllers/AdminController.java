@@ -27,12 +27,9 @@ public class AdminController {
 
     @GetMapping("/companies")
     public List<Company> getAllCompanies(@RequestHeader("Authorization") UUID token) throws CoupounSystemException {
-        System.out.println("1");
         if (!tokenService.isUserAllowed(token, ClientsType.ADMINISTRATOR)){
-            System.out.println("2");
             throw new CoupounSystemException(ErrMsg.INVALID_ACTION);
         }
-        System.out.println("3");
         return adminService.getAllCompanies();
     }
 
@@ -46,29 +43,29 @@ public class AdminController {
 
     }
 
-    @DeleteMapping("/companies/{id}")
-    public void deleteCompany( @RequestHeader("Authorization") UUID token, @PathVariable int id) throws Exception {
+    @DeleteMapping("/companies/{companyId}")
+    public void deleteCompany( @RequestHeader("Authorization") UUID token, @PathVariable int companyId) throws Exception {
         if (!tokenService.isUserAllowed(token, ClientsType.ADMINISTRATOR)){
             throw new CoupounSystemException(ErrMsg.INVALID_ACTION);
         }
-        adminService.deleteCompany(id);
+        adminService.deleteCompany(companyId);
 
     }
 
-    @GetMapping("/companies/{id}")
-    public Company getSingleCompany( @RequestHeader("Authorization") UUID token, @PathVariable int id) throws Exception {
+    @GetMapping("/companies/{companyId}")
+    public Company getSingleCompany( @RequestHeader("Authorization") UUID token, @PathVariable int companyId) throws Exception {
         if (!tokenService.isUserAllowed(token, ClientsType.ADMINISTRATOR)){
             throw new CoupounSystemException(ErrMsg.INVALID_ACTION);
         }
-        return adminService.getSingleCompany(id);
+        return adminService.getSingleCompany(companyId);
     }
 
-    @PutMapping("/companies/{id}")
-    public void updateCompany(@RequestHeader("Authorization") UUID token, @PathVariable int id, @RequestBody Company company) throws Exception {
+    @PutMapping("/companies/{companyId}")
+    public void updateCompany(@RequestHeader("Authorization") UUID token, @PathVariable int companyId, @RequestBody Company company) throws Exception {
         if (!tokenService.isUserAllowed(token, ClientsType.ADMINISTRATOR)){
             throw new CoupounSystemException(ErrMsg.INVALID_ACTION);
         }
-        adminService.updateCompany(id,company);
+        adminService.updateCompany(companyId,company);
 
     }
 
@@ -96,29 +93,29 @@ public class AdminController {
 
     }
 
-    @DeleteMapping("/customer/{id}")
-    public void deleteCustomer(@RequestHeader("Authorization") UUID token, @PathVariable int id) throws Exception {
+    @DeleteMapping("/customer/{customerId}")
+    public void deleteCustomer(@RequestHeader("Authorization") UUID token, @PathVariable int customerId) throws Exception {
         if (!tokenService.isUserAllowed(token, ClientsType.ADMINISTRATOR)){
             throw new CoupounSystemException(ErrMsg.INVALID_ACTION);
         }
-        adminService.deleteCustomer(id);
+        adminService.deleteCustomer(customerId);
 
     }
 
-    @GetMapping("/customer/{id}")
-    public Customer getSingleCustomer(@RequestHeader("Authorization") UUID token, @PathVariable int id) throws Exception {
+    @GetMapping("/customer/{customerId}")
+    public Customer getSingleCustomer(@RequestHeader("Authorization") UUID token, @PathVariable int customerId) throws Exception {
         if (!tokenService.isUserAllowed(token, ClientsType.ADMINISTRATOR)){
             throw new CoupounSystemException(ErrMsg.INVALID_ACTION);
         }
-        return adminService.getSingleCustomer(id);
+        return adminService.getSingleCustomer(customerId);
     }
 
-    @PutMapping("/customer/{id}")
-    public void updateCustomer(@RequestHeader("Authorization") UUID token, @PathVariable int id, @RequestBody Customer customer) throws Exception {
+    @PutMapping("/customer/{customerId}")
+    public void updateCustomer(@RequestHeader("Authorization") UUID token, @PathVariable int customerId, @RequestBody Customer customer) throws Exception {
         if (!tokenService.isUserAllowed(token, ClientsType.ADMINISTRATOR)){
             throw new CoupounSystemException(ErrMsg.INVALID_ACTION);
         }
-        adminService.updateCustomer(id, customer);
+        adminService.updateCustomer(customerId, customer);
 
     }
 

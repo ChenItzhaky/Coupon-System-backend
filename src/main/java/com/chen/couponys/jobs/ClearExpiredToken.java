@@ -10,7 +10,7 @@ public class ClearExpiredToken {
     @Autowired
     private TokenService tokenService;
 
-    @Scheduled(fixedDelay = 1000*60*30)
+    @Scheduled(fixedDelay = 60_000)
     public void clearTokes(){
         tokenService.clear();
     }
